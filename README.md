@@ -2,18 +2,19 @@
 
 Purpose: Renames image files in a folder based on date photo taken from EXIF metadata
 
-Author: Matthew Renze
+Original author: Matthew Renze
+Modified by: Tim Stephenson to offer choice of move and copy and to recurse directories
 
-Usage: python.exe Rename.py input-folder
-  - input-folder = the directory containing the image files to be renamed
+Usage: ./organise-py --help
 
-Example: python.exe Rename.py C:\Photos
+Example: ./organise.py -r -i ~/Photos -o ~/Album
+  will create a new structure, copy and rename the photos into Album
 
-Behavior:  
- - Given a photo named "Photo Apr 01, 5 54 17 PM.jpg"  
+Behaviour:
+ - Given a photo named "Photo of Dad.jpg"
  - with EXIF date taken of "4/1/2018 5:54:17 PM"  
  - when you run this script on its parent folder
- - then it will be renamed "20180401-175417.jpg"
+ - then it will be moved / copied to 2018/04/2018-04-01-Photo of Dad.jpg"
 
 Notes:
   - For safety, please make a backup before running this script

@@ -15,12 +15,19 @@ valid_extensions = [".JPG", ".jpg", ".jpeg", ".png"]
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input", default=".", help="base input directory")
+    parser.add_argument("-i", "--input", help="base input directory")
     parser.add_argument("-o", "--output", default="output", help="base output directry")
     parser.add_argument("-m", "--move", action="store_true", help="move the file (default is to copy)")
     parser.add_argument("-r", "--recurse", action="store_true", help="process child directories as well")
     parser.add_argument("-v", "--verbose", action="store_true", help="increase the progess messages")
-    return parser.parse_args()
+
+    args = parser.parse_args()
+
+    if (args.input == None):
+        parser.print_help()
+        sys.exit('Invalid arguments, refer to usage statement')
+
+    return args
 
 def process_dir(dir_path):
     print('processing dir: ' + dir_path)
@@ -49,7 +56,7 @@ def process_dir(dir_path):
 def process_image(file_name):
     print('    process image: ' + file_name)
     # Create the old file path
-    old_file_path = os.path.join(dir_path, file_name)
+    old_file_path = os.path.join(args.input, file_name)
 
     # open the image
     if (args.verbose):
@@ -122,8 +129,4 @@ def process_image(file_name):
 # main
 args = parse_args()
 
-dir_path = args.input
-if (dir_path == '.'):
-    dir_path = os.getcwd()
-
-process_dir(dir_path)
+process_dir(args.input)
